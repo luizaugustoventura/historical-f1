@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import { KeyboardAvoidingView, View, Text, TextInput, StyleSheet, Alert, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import Emoji from 'react-native-emoji';
@@ -32,7 +32,10 @@ const Home = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView 
+            style={styles.container}
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
             <View style={styles.header}>
                 <LogoBlack width={300} height={90} />
             </View>
@@ -61,7 +64,7 @@ const Home = () => {
                     </Text>
                 </Text>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 
