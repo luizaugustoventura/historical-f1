@@ -61,21 +61,21 @@ const SeasonResults = () => {
 
                             <View style={styles.contentCardData}>
                                 <Text style={styles.contentCardDataLabel}>
-                                    Circuit:
+                                    Circuit:&nbsp;
                                     <Text style={styles.contentCardDataValue}> 
                                         {race.Circuit.circuitName}
                                     </Text>
                                 </Text>
                                         
                                 <Text style={styles.contentCardDataLabel}>
-                                    Location:
+                                    Location:&nbsp;
                                     <Text style={styles.contentCardDataValue}> 
                                         {race.Circuit.Location.locality}, {race.Circuit.Location.country}
                                     </Text>
                                 </Text>
                                 
                                 <Text style={styles.contentCardDataLabel}>
-                                    Date:
+                                    Date:&nbsp;
                                     <Text style={styles.contentCardDataValue}> 
                                         {race.date}
                                     </Text>

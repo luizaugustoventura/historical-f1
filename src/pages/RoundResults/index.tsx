@@ -50,21 +50,21 @@ const RoundResults = () => {
 
                             <View style={styles.contentCardData}>
                                 <Text style={styles.contentCardDataLabel}>
-                                    Driver:
+                                    Driver:&nbsp;
                                     <Text style={styles.contentCardDataValue}>
                                         {result.Driver.givenName} {result.Driver.familyName}
                                     </Text>
                                 </Text>
                                         
                                 <Text style={styles.contentCardDataLabel}>
-                                    Nationality:
+                                    Nationality:&nbsp;
                                     <Text style={styles.contentCardDataValue}>
                                         {result.Driver.nationality}
                                     </Text>
                                 </Text>
                                 
                                 <Text style={styles.contentCardDataLabel}>
-                                    Team:
+                                    Team:&nbsp;
                                     <Text style={styles.contentCardDataValue}>
                                         {result.Constructor.name}
                                     </Text>
@@ -72,7 +72,7 @@ const RoundResults = () => {
 
                                 { (result.status === 'Finished' || result.status.startsWith('+')) ? (
                                     <Text style={styles.contentCardDataLabel}>
-                                        Finished:
+                                        Finished:&nbsp;
                                         <Text style={styles.contentCardDataValue}>
                                             { result.status !== 'Finished' ? result.status : null }
                                             { result.Time ? result.Time.time : null }
@@ -80,7 +80,7 @@ const RoundResults = () => {
                                     </Text>
                                 ): (
                                     <Text style={styles.contentCardDataLabel}>
-                                        Status:
+                                        Status:&nbsp;
                                         <Text style={styles.contentCardDataValue}>
                                             {result.status}
                                         </Text>
