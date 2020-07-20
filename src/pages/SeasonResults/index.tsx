@@ -50,7 +50,7 @@ const SeasonResults = () => {
                             style={styles.contentCard}
                             activeOpacity={0.7}
                             onPress={() => handleNavigateToRound(race.round)}
-                            key={String(race.round)}
+                            key={race.round}
                         >
                             <View style={styles.contentCardHeader}>
                             <Text style={styles.contentCardHeaderTitle}>{race.round}-{race.raceName}</Text>
