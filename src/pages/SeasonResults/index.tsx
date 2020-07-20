@@ -3,49 +3,12 @@ import { View, TouchableOpacity, Text, Alert, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Feather as Icon } from '@expo/vector-icons';
 import api from '../../services/api';
+import {  Params, SeasonResultsResponse, Races } from './interfaces';
 
 import Header from '../../components/Header';
 import PageTitle from '../../components/PageTitle';
 import LoadingContent from '../../components/LoadingContent';
 import ContentContainer from '../../components/ContentContainer';
-
-interface Params {
-    season: string
-}
-
-interface SeasonResultsResponse {
-    MRData: {
-        RaceTable: {
-            Races: [{
-                season: string,
-                round: string,
-                raceName: string,
-                Circuit: {
-                    circuitName: string,
-                    Location: {
-                        locality: string,
-                        country: string
-                    }
-                },
-                date: string
-            }]
-        }
-    }
-}
-
-interface Races {
-    season: string,
-    round: string,
-    raceName: string,
-    Circuit: {
-        circuitName: string,
-        Location: {
-            locality: string,
-            country: string
-        }
-    },
-    date: string
-}
 
 const SeasonResults = () => {
     const [seasonResults, setSeasonResults] = useState<Races[]>();

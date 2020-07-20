@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import api from '../../services/api';
+import { Params } from './interfaces';
 
 import Header from '../../components/Header';
 import PageTitle from '../../components/PageTitle';
 import ContentContainer from '../../components/ContentContainer';
 
-interface Params {
-    season: string;
-    round: string;
-}
+
 
 const RoundResults = () => {
     const route = useRoute();
 
     const routeParams = route.params as Params;
+
+    useEffect(() => {}, []);
 
     return (
         <View style={styles.mainContainer}>
