@@ -27,7 +27,7 @@ interface RoundResultsResponse {
     }
 }
 
-interface Race {
+interface RaceResults {
     position: string,
     Driver: {
         givenName: string,
@@ -43,4 +43,4 @@ interface Race {
     }
 }
 
-export { Params, RoundResultsResponse, Race }
+export { Params, RoundResultsResponse, RaceResults }
