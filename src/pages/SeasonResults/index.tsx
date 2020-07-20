@@ -62,7 +62,7 @@ const SeasonResults = () => {
             return;
         }
         
-        api.get<SeasonResultsResponse>(`${routeParams.season}.json`).then(response => {
+        api.get<SeasonResultsResponse>(`${routeParams.season}`).then(response => {
             setSeasonResults(response.data.MRData.RaceTable.Races);
         });
     }, []);
