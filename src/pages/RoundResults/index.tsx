@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, ViewStyle } from 'react-native';
 import LoadingContent from '../../components/LoadingContent';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '../../services/api';
@@ -8,8 +8,6 @@ import { Params, RoundResultsResponse, RaceResults } from './interfaces';
 import Header from '../../components/Header';
 import PageTitle from '../../components/PageTitle';
 import ContentContainer from '../../components/ContentContainer';
-
-
 
 const RoundResults = () => {
     const [raceResults, setRaceResults] = useState<RaceResults[]>();
@@ -32,6 +30,37 @@ const RoundResults = () => {
             });
     }, []);
 
+    function getDriverPositionStyles(position: string) {
+        let backgroundColor = '';
+        let opacity = undefined;
+
+        switch(position) {
+            case '1': 
+                backgroundColor = '#CFAA55';
+                opacity = 0.8;
+                break;
+            case '2': 
+                backgroundColor = '#D4D4D4';
+                opacity = 0.8;
+                break;
+            case '3': 
+                backgroundColor = '#D5784F';
+                opacity = 0.8;
+                break;
+            default:
+                backgroundColor= '#FFF';
+        }
+
+        const styles = StyleSheet.create({
+            contentCardColor: {
+                backgroundColor,
+                opacity
+            }
+        });
+
+        return styles.contentCardColor;
+    }
+
     return (
         <View style={styles.mainContainer}>
             <Header />
@@ -41,8 +70,8 @@ const RoundResults = () => {
             { raceResults ? (
                 <ContentContainer>
                     { raceResults.map(result => (
-                        <View key={result.position} style={styles.contentCard}>
-                            <View style={styles.contentCardHeader}>
+                        <View key={result.position} style={[styles.contentCard, getDriverPositionStyles(result.position)]}>
+                            <View>
                                 <Text style={styles.contentCardHeaderTitle}>
                                     {result.position}
                                 </Text>
@@ -106,13 +135,7 @@ const styles = StyleSheet.create({
         padding: 12,
         marginBottom: 12,
         borderRadius: 10,
-        backgroundColor: '#FFF'
-    },
-
-    contentCardHeader: {
-        // FIX THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        flexDirection: 'row',
-        justifyContent: 'space-between'
+        //backgroundColor: '#FFF'
     },
 
     contentCardHeaderTitle: {
