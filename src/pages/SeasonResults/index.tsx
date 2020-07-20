@@ -53,24 +53,32 @@ const SeasonResults = () => {
                             key={race.round}
                         >
                             <View style={styles.contentCardHeader}>
-                            <Text style={styles.contentCardHeaderTitle}>{race.round}-{race.raceName}</Text>
+                                <Text style={styles.contentCardHeaderTitle}>
+                                    {race.round}-{race.raceName}
+                                </Text>
                                 <Icon name="arrow-right" size={18} color="#E54A4A"/>
                             </View>
 
                             <View style={styles.contentCardData}>
                                 <Text style={styles.contentCardDataLabel}>
                                     Circuit:
-                                    <Text style={styles.contentCardDataValue}> {race.Circuit.circuitName}</Text>
+                                    <Text style={styles.contentCardDataValue}> 
+                                        {race.Circuit.circuitName}
+                                    </Text>
                                 </Text>
                                         
                                 <Text style={styles.contentCardDataLabel}>
                                     Location:
-                                    <Text style={styles.contentCardDataValue}> {race.Circuit.Location.locality}, {race.Circuit.Location.country}</Text>
+                                    <Text style={styles.contentCardDataValue}> 
+                                        {race.Circuit.Location.locality}, {race.Circuit.Location.country}
+                                    </Text>
                                 </Text>
                                 
                                 <Text style={styles.contentCardDataLabel}>
                                     Date:
-                                    <Text style={styles.contentCardDataValue}> {race.date}</Text>
+                                    <Text style={styles.contentCardDataValue}> 
+                                        {race.date}
+                                    </Text>
                                 </Text>
                             </View>
                         </TouchableOpacity>
