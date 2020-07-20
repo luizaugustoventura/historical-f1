@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
-import { View, ScrollView, TouchableOpacity, Text, Alert, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, TouchableOpacity, Text, Alert, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Feather as Icon } from '@expo/vector-icons';
-import  Constants from 'expo-constants';
+import api from '../../services/api';
 
 import Header from '../../components/Header';
 import PageTitle from '../../components/PageTitle';
+import LoadingContent from '../../components/LoadingContent';
 import ContentContainer from '../../components/ContentContainer';
 
 interface Params {
@@ -15,8 +16,9 @@ interface Params {
 interface SeasonResultsResponse {
     MRData: {
         RaceTable: {
-            season: string,
             Races: [{
+                season: string,
+                round: string,
                 raceName: string,
                 Circuit: {
                     circuitName: string,
@@ -31,7 +33,23 @@ interface SeasonResultsResponse {
     }
 }
 
+interface Races {
+    season: string,
+    round: string,
+    raceName: string,
+    Circuit: {
+        circuitName: string,
+        Location: {
+            locality: string,
+            country: string
+        }
+    },
+    date: string
+}
+
 const SeasonResults = () => {
+    const [seasonResults, setSeasonResults] = useState<Races[]>();
+
     const navigation = useNavigation();
     const route = useRoute();
 
@@ -41,13 +59,18 @@ const SeasonResults = () => {
         if (!routeParams.season) {
             Alert.alert('Ooops', 'Parameter not found');
             navigation.goBack();
+            return;
         }
+        
+        api.get<SeasonResultsResponse>(`${routeParams.season}.json`).then(response => {
+            setSeasonResults(response.data.MRData.RaceTable.Races);
+        });
     }, []);
 
-    function handleNavigateToRound() {
+    function handleNavigateToRound(round: string) {
         navigation.navigate('RoundResults', {
-            season: '1980',
-            round: '1'
+            season: routeParams.season,
+            round
         });
     }
 
@@ -55,93 +78,43 @@ const SeasonResults = () => {
         <View style={styles.mainContainer}>
             <Header />
          
-            <PageTitle text="1980 season results" />
+            <PageTitle text={`${routeParams.season} season results`} />
             
-            <ContentContainer>
-                <TouchableOpacity 
-                    style={styles.contentCard}
-                    activeOpacity={0.7}
-                    onPress={handleNavigateToRound}
-                >
-                    <View style={styles.contentCardHeader}>
-                        <Text style={styles.contentCardHeaderTitle}>1-Argentine Grand Prix</Text>
-                        <Icon name="arrow-right" size={18} color="#E54A4A"/>
-                    </View>
+            { seasonResults ? (
+                <ContentContainer>
+                    { seasonResults.map(race => (
+                        <TouchableOpacity 
+                            style={styles.contentCard}
+                            activeOpacity={0.7}
+                            onPress={() => handleNavigateToRound(race.round)}
+                            key={String(race.round)}
+                        >
+                            <View style={styles.contentCardHeader}>
+                            <Text style={styles.contentCardHeaderTitle}>{race.round}-{race.raceName}</Text>
+                                <Icon name="arrow-right" size={18} color="#E54A4A"/>
+                            </View>
 
-                    <View style={styles.contentCardData}>
-                        <Text style={styles.contentCardDataLabel}>
-                            Circuit:
-                            <Text style={styles.contentCardDataValue}>Autódromo Juan y Oscar Gálvez</Text>
-                        </Text>
+                            <View style={styles.contentCardData}>
+                                <Text style={styles.contentCardDataLabel}>
+                                    Circuit:
+                                    <Text style={styles.contentCardDataValue}> {race.Circuit.circuitName}</Text>
+                                </Text>
+                                        
+                                <Text style={styles.contentCardDataLabel}>
+                                    Location:
+                                    <Text style={styles.contentCardDataValue}> {race.Circuit.Location.locality}, {race.Circuit.Location.country}</Text>
+                                </Text>
                                 
-                        <Text style={styles.contentCardDataLabel}>
-                            Location:
-                            <Text style={styles.contentCardDataValue}>Buenos Aires, Argentina</Text>
-                        </Text>
-                        
-                        <Text style={styles.contentCardDataLabel}>
-                            Date:
-                            <Text style={styles.contentCardDataValue}>1980-01-13</Text>
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity 
-                    style={styles.contentCard}
-                    activeOpacity={0.7}
-                    onPress={handleNavigateToRound}
-                >
-                    <View style={styles.contentCardHeader}>
-                        <Text style={styles.contentCardHeaderTitle}>1-Argentine Grand Prix</Text>
-                        <Icon name="arrow-right" size={18} color="#E54A4A"/>
-                    </View>
-
-                    <View style={styles.contentCardData}>
-                        <Text style={styles.contentCardDataLabel}>
-                            Circuit:
-                            <Text style={styles.contentCardDataValue}>Autódromo Juan y Oscar Gálvez</Text>
-                        </Text>
-                                
-                        <Text style={styles.contentCardDataLabel}>
-                            Location:
-                            <Text style={styles.contentCardDataValue}>Buenos Aires, Argentina</Text>
-                        </Text>
-                        
-                        <Text style={styles.contentCardDataLabel}>
-                            Date:
-                            <Text style={styles.contentCardDataValue}>1980-01-13</Text>
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity 
-                    style={styles.contentCard}
-                    activeOpacity={0.7}
-                    onPress={handleNavigateToRound}
-                >
-                    <View style={styles.contentCardHeader}>
-                        <Text style={styles.contentCardHeaderTitle}>1-Argentine Grand Prix</Text>
-                        <Icon name="arrow-right" size={18} color="#E54A4A"/>
-                    </View>
-
-                    <View style={styles.contentCardData}>
-                        <Text style={styles.contentCardDataLabel}>
-                            Circuit:
-                            <Text style={styles.contentCardDataValue}>Autódromo Juan y Oscar Gálvez</Text>
-                        </Text>
-                                
-                        <Text style={styles.contentCardDataLabel}>
-                            Location:
-                            <Text style={styles.contentCardDataValue}>Buenos Aires, Argentina</Text>
-                        </Text>
-                        
-                        <Text style={styles.contentCardDataLabel}>
-                            Date:
-                            <Text style={styles.contentCardDataValue}>1980-01-13</Text>
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-            </ContentContainer>
+                                <Text style={styles.contentCardDataLabel}>
+                                    Date:
+                                    <Text style={styles.contentCardDataValue}> {race.date}</Text>
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    ) ) }
+                </ContentContainer>
+            ) : <LoadingContent /> }
+            
         </View>
     );
 }
