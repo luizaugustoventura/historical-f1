@@ -12,6 +12,11 @@ const Home = () => {
 
     const navigation = useNavigation();
 
+    function onInputTextChanged(text: string) {
+        console.log('texto mudou');
+        setSeason(text.replace(/[^0-9]/g, ''));
+    }
+
     function handleNavigateToSeason() {
         if (!season) {
             return;
@@ -41,9 +46,12 @@ const Home = () => {
             </View>
 
             <View style={styles.form}>
-                <TextInput onChangeText={setSeason}
+                <TextInput 
                     style={styles.formInput} 
-                    placeholder="Input the F1 season you want..." 
+                    value={season}
+                    onChangeText={(text) => onInputTextChanged(text)}
+                    placeholder="Input the F1 season you want..."
+                    keyboardType="numeric" 
                 />
 
                 <RectButton style={styles.formButton} onPress={handleNavigateToSeason} >
