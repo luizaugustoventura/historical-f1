@@ -7,6 +7,7 @@ interface RoundResultsResponse {
     MRData: {
         RaceTable: {
             Races: {
+                raceName: string,
                 Results: {
                     position: string,
                     Driver: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert, ViewStyle } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import LoadingContent from '../../components/LoadingContent';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '../../services/api';
@@ -11,6 +11,7 @@ import ContentContainer from '../../components/ContentContainer';
 
 const RoundResults = () => {
     const [raceResults, setRaceResults] = useState<RaceResults[]>();
+    const [raceName, setRaceName] = useState('');
 
     const navigation = useNavigation();
     const route = useRoute();
@@ -26,7 +27,13 @@ const RoundResults = () => {
 
         api.get<RoundResultsResponse>(`${routeParams.season}/${routeParams.round}/results`)
             .then(response => {
-                setRaceResults(response.data.MRData.RaceTable.Races[0].Results);
+                try {
+                    setRaceResults(response.data.MRData.RaceTable.Races[0].Results);
+                    setRaceName(response.data.MRData.RaceTable.Races[0].raceName);
+                } catch {
+                    Alert.alert('Sorry', 'We did not find any data for your request');
+                    navigation.goBack();
+                }
             });
     }, []);
 
@@ -65,7 +72,9 @@ const RoundResults = () => {
         <View style={styles.mainContainer}>
             <Header />
 
-            <PageTitle text="1980 Argentine Grand Prix results" />
+            <PageTitle 
+                text={ (routeParams.season && raceName) ? `${routeParams.season} ${raceName}` : "Loading" } 
+            />
 
             { raceResults ? (
                 <ContentContainer>

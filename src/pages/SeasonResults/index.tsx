@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text, Alert, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Feather as Icon } from '@expo/vector-icons';
 import api from '../../services/api';
+import isValidRound, { ShortDate } from '../../utils/validateRound'; 
 import {  Params, SeasonResultsResponse, Races } from './interfaces';
 
 import Header from '../../components/Header';
@@ -26,11 +27,36 @@ const SeasonResults = () => {
         }
         
         api.get<SeasonResultsResponse>(`${routeParams.season}`).then(response => {
-            setSeasonResults(response.data.MRData.RaceTable.Races);
+            try {
+                setSeasonResults(response.data.MRData.RaceTable.Races);
+            } catch {
+                Alert.alert('Sorry', 'We did not find any data for your request');
+                navigation.goBack();
+            } 
         });
     }, []);
 
-    function handleNavigateToRound(round: string) {
+    function handleNavigateToRound(round: string, date: string) {
+        const [year, month, day] = date.split('-').map(element => Number(element));
+        const raceDate: ShortDate = {
+            year,
+            month,
+            day
+        } 
+
+        const now = new Date();
+        const currentDate: ShortDate = {
+            year: now.getFullYear(),
+            month: (now.getMonth() + 1), 
+            day: now.getDate(), 
+        };
+
+       
+        if (!isValidRound(currentDate, raceDate)) {
+            Alert.alert('Sorry', 'This content is not available');
+            return;
+        }
+
         navigation.navigate('RoundResults', {
             season: routeParams.season,
             round
@@ -49,7 +75,7 @@ const SeasonResults = () => {
                         <TouchableOpacity 
                             style={styles.contentCard}
                             activeOpacity={0.7}
-                            onPress={() => handleNavigateToRound(race.round)}
+                            onPress={() => handleNavigateToRound(race.round, race.date)}
                             key={race.round}
                         >
                             <View style={styles.contentCardHeader}>
