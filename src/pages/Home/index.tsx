@@ -13,7 +13,6 @@ const Home = () => {
     const navigation = useNavigation();
 
     function onInputTextChanged(text: string) {
-        console.log('texto mudou');
         setSeason(text.replace(/[^0-9]/g, ''));
     }
 
