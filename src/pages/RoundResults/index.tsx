@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
         padding: 12,
         marginBottom: 12,
         borderRadius: 10,
-        //backgroundColor: '#FFF'
     },
 
     contentCardHeaderTitle: {
