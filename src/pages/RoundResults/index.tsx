@@ -3,11 +3,14 @@ import { View, Text, StyleSheet, Alert } from 'react-native';
 import LoadingContent from '../../components/LoadingContent';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '../../services/api';
-import { Params, RoundResultsResponse, RaceResults } from './interfaces';
+import { Params, RoundResultsResponse } from './interfaces';
+import RaceResults from '../../common/interfaces/RaceResults';
 
 import Header from '../../components/Header';
 import PageTitle from '../../components/PageTitle';
 import ContentContainer from '../../components/ContentContainer';
+
+import { GridPodium, Grid } from '../../components/Grid';
 
 const RoundResults = () => {
     const [raceResults, setRaceResults] = useState<RaceResults[]>();
@@ -78,7 +81,9 @@ const RoundResults = () => {
 
             { raceResults ? (
                 <ContentContainer>
-                    { raceResults.map(result => (
+                    <GridPodium grid={raceResults.slice(0,3)} />
+                    <Grid grid={raceResults.slice(3)} />
+                    {/* { raceResults.map(result => (
                         <View key={result.position} style={[styles.contentCard, getDriverPositionStyles(result.position)]}>
                             <View>
                                 <Text style={styles.contentCardHeaderTitle}>
@@ -126,7 +131,7 @@ const RoundResults = () => {
                                 )}
                             </View>
                         </View>
-                    ))}
+                    ))} */}
                 </ContentContainer>
             ) : <LoadingContent /> }
         </View>
