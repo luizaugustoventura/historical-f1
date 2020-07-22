@@ -54,6 +54,27 @@ const GridPodium: React.FC<GridProps> = ({ grid }) => {
         // }
     }, []);
 
+    const styles = StyleSheet.create({
+        mainContainer: {
+            width: '48%',
+            alignSelf: 'center'
+        },
+    
+        secondaryContainer: {
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between'
+        },
+    
+        secondaryContainerCardWrapper: {
+            width: '48%'
+        },
+
+        contentCardHeight: {
+            height: 240
+        }
+    });
+
     if (!(first && second && third)) {
         return null;
     }
@@ -61,62 +82,68 @@ const GridPodium: React.FC<GridProps> = ({ grid }) => {
     return (
         <>
             <View style={styles.mainContainer}>
-                <View style={[styles.contentCard, getDriverPositionStyles(first.position)]}>
+                <View 
+                    style={[
+                        globalStyles.contentCard,
+                        styles.contentCardHeight, 
+                        getDriverPositionStyles(first.position)
+                    ]}
+                >
                     <View>
-                        <Text style={styles.contentCardHeaderTitle}>
+                        <Text style={globalStyles.contentCardHeaderTitle}>
                             {first.position}
                         </Text>
                     </View>
 
-                    <View style={styles.contentCardData}>
+                    <View style={globalStyles.contentCardData}>
                         <Text 
-                            style={styles.contentCardDataLabel}
+                            style={globalStyles.contentCardDataLabel}
                             textBreakStrategy="highQuality"
                         >
                             {'Driver: '}
-                            <Text style={styles.contentCardDataValue}>
+                            <Text style={globalStyles.contentCardDataValue}>
                                 {first.Driver.givenName} {first.Driver.familyName}
                             </Text>
                         </Text>
                                 
                         <Text 
-                            style={styles.contentCardDataLabel}
+                            style={globalStyles.contentCardDataLabel}
                             textBreakStrategy="highQuality"
                         >
                             {'Nationality: '}
-                            <Text style={styles.contentCardDataValue}>
+                            <Text style={globalStyles.contentCardDataValue}>
                                 {first.Driver.nationality}
                             </Text>
                         </Text>
                         
                         <Text 
-                            style={styles.contentCardDataLabel}
+                            style={globalStyles.contentCardDataLabel}
                             textBreakStrategy="highQuality"
                         >
                             {'Team: '}
-                            <Text style={styles.contentCardDataValue}>
+                            <Text style={globalStyles.contentCardDataValue}>
                                 {first.Constructor.name}
                             </Text>
                         </Text>
 
                         { (first.status === 'Finished' || first.status.startsWith('+')) ? (
                             <Text 
-                                style={styles.contentCardDataLabel}
+                                style={globalStyles.contentCardDataLabel}
                                 textBreakStrategy="highQuality"
                             >
                                 {'Finished: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     { first.status !== 'Finished' ? first.status : null }
                                     { first.Time ? first.Time.time : null }
                                 </Text>
                             </Text>
                         ): (
                             <Text 
-                                style={styles.contentCardDataLabel}
+                                style={globalStyles.contentCardDataLabel}
                                 textBreakStrategy="highQuality"
                             >
                                 {'Status: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     {first.status}
                                 </Text>
                             </Text>
@@ -127,62 +154,68 @@ const GridPodium: React.FC<GridProps> = ({ grid }) => {
 
             <View style={styles.secondaryContainer}>
                 <View style={styles.secondaryContainerCardWrapper}>
-                    <View style={[styles.contentCard, getDriverPositionStyles(second.position)]}>
+                    <View 
+                        style={[
+                            globalStyles.contentCard, 
+                            styles.contentCardHeight,
+                            getDriverPositionStyles(second.position)
+                        ]}
+                    >
                         <View>
-                            <Text style={styles.contentCardHeaderTitle}>
+                            <Text style={globalStyles.contentCardHeaderTitle}>
                                 {second.position}
                             </Text>
                         </View>
 
-                        <View style={styles.contentCardData}>
+                        <View style={globalStyles.contentCardData}>
                             <Text 
-                                style={styles.contentCardDataLabel}
+                                style={globalStyles.contentCardDataLabel}
                                 textBreakStrategy="highQuality"
                             >
                                 {'Driver: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     {second.Driver.givenName} {second.Driver.familyName}
                                 </Text>
                             </Text>
                                     
                             <Text 
-                                style={styles.contentCardDataLabel}
+                                style={globalStyles.contentCardDataLabel}
                                 textBreakStrategy="highQuality"
                             >
                                 {'Nationality: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     {second.Driver.nationality}
                                 </Text>
                             </Text>
                             
                             <Text 
-                                style={styles.contentCardDataLabel}
+                                style={globalStyles.contentCardDataLabel}
                                 textBreakStrategy="highQuality"
                             >
                                 {'Team: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     {second.Constructor.name}
                                 </Text>
                             </Text>
 
                             { (second.status === 'Finished' || second.status.startsWith('+')) ? (
                                 <Text 
-                                    style={styles.contentCardDataLabel}
+                                    style={globalStyles.contentCardDataLabel}
                                     textBreakStrategy="highQuality"
                                 >
                                     {'Finished: '}
-                                    <Text style={styles.contentCardDataValue}>
+                                    <Text style={globalStyles.contentCardDataValue}>
                                         { second.status !== 'Finished' ? second.status : null }
                                         { second.Time ? second.Time.time : null }
                                     </Text>
                                 </Text>
                             ): (
                                 <Text 
-                                    style={styles.contentCardDataLabel}
+                                    style={globalStyles.contentCardDataLabel}
                                     textBreakStrategy="highQuality"
                                 >
                                     {'Status: '}
-                                    <Text style={styles.contentCardDataValue}>
+                                    <Text style={globalStyles.contentCardDataValue}>
                                         {second.status}
                                     </Text>
                                 </Text>
@@ -193,62 +226,68 @@ const GridPodium: React.FC<GridProps> = ({ grid }) => {
                 
 
                 <View style={styles.secondaryContainerCardWrapper}>
-                    <View style={[styles.contentCard, getDriverPositionStyles(third.position)]}>
+                    <View 
+                        style={[
+                            globalStyles.contentCard, 
+                            styles.contentCardHeight,
+                            getDriverPositionStyles(third.position)
+                        ]}
+                    >
                         <View>
-                            <Text style={styles.contentCardHeaderTitle}>
+                            <Text style={globalStyles.contentCardHeaderTitle}>
                                 {third.position}
                             </Text>
                         </View>
 
-                        <View style={styles.contentCardData}>
+                        <View style={globalStyles.contentCardData}>
                             <Text 
-                                style={styles.contentCardDataLabel}
+                                style={globalStyles.contentCardDataLabel}
                                 textBreakStrategy="highQuality"
                             >
                                 {'Driver: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     {third.Driver.givenName} {third.Driver.familyName}
                                 </Text>
                             </Text>
                                     
                             <Text 
-                                style={styles.contentCardDataLabel}
+                                style={globalStyles.contentCardDataLabel}
                                 textBreakStrategy="highQuality"
                             >
                                 {'Nationality: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     {third.Driver.nationality}
                                 </Text>
                             </Text>
                             
                             <Text 
-                                style={styles.contentCardDataLabel}
+                                style={globalStyles.contentCardDataLabel}
                                 textBreakStrategy="highQuality"
                             >
                                 {'Team: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     {third.Constructor.name}
                                 </Text>
                             </Text>
 
                             { (third.status === 'Finished' || third.status.startsWith('+')) ? (
                                 <Text 
-                                    style={styles.contentCardDataLabel}
+                                    style={globalStyles.contentCardDataLabel}
                                     textBreakStrategy="highQuality"
                                 >
                                     {'Finished: '}
-                                    <Text style={styles.contentCardDataValue}>
+                                    <Text style={globalStyles.contentCardDataValue}>
                                         { third.status !== 'Finished' ? third.status : null }
                                         { third.Time ? third.Time.time : null }
                                     </Text>
                                 </Text>
                             ): (
                                 <Text 
-                                    style={styles.contentCardDataLabel}
+                                    style={globalStyles.contentCardDataLabel}
                                     textBreakStrategy="highQuality"
                                 >
                                     {'Status: '}
-                                    <Text style={styles.contentCardDataValue}>
+                                    <Text style={globalStyles.contentCardDataValue}>
                                         {third.status}
                                     </Text>
                                 </Text>
@@ -277,63 +316,63 @@ const Grid: React.FC<GridProps> = ({ grid }) => {
             { grid.map(gridPlace => (
                 <View
                     key={gridPlace.position} 
-                    style={[styles.contentCard, getDriverPositionStyles(gridPlace.position)]}
+                    style={[globalStyles.contentCard, getDriverPositionStyles(gridPlace.position)]}
                 >
                     <View>
-                        <Text style={styles.contentCardHeaderTitle}>
+                        <Text style={globalStyles.contentCardHeaderTitle}>
                             {gridPlace.position}
                         </Text>
                     </View>
 
-                    <View style={styles.contentCardData}>
+                    <View style={globalStyles.contentCardData}>
                         <Text 
-                            style={styles.contentCardDataLabel}
+                            style={globalStyles.contentCardDataLabel}
                             textBreakStrategy="highQuality"
                         >
                             {'Driver: '}
-                            <Text style={styles.contentCardDataValue}>
+                            <Text style={globalStyles.contentCardDataValue}>
                                 {gridPlace.Driver.givenName} {gridPlace.Driver.familyName}
                             </Text>
                         </Text>
                                 
                         <Text 
-                            style={styles.contentCardDataLabel}
+                            style={globalStyles.contentCardDataLabel}
                             textBreakStrategy="highQuality"
                         >
                             {'Nationality: '}
-                            <Text style={styles.contentCardDataValue}>
+                            <Text style={globalStyles.contentCardDataValue}>
                                 {gridPlace.Driver.nationality}
                             </Text>
                         </Text>
                         
                         <Text 
-                            style={styles.contentCardDataLabel}
+                            style={globalStyles.contentCardDataLabel}
                             textBreakStrategy="highQuality"
                         >
                             {'Team: '}
-                            <Text style={styles.contentCardDataValue}>
+                            <Text style={globalStyles.contentCardDataValue}>
                                 {gridPlace.Constructor.name}
                             </Text>
                         </Text>
 
                         { (gridPlace.status === 'Finished' || gridPlace.status.startsWith('+')) ? (
                             <Text 
-                                style={styles.contentCardDataLabel} 
+                                style={globalStyles.contentCardDataLabel} 
                                 textBreakStrategy="highQuality"
                             >
                                 {'Finished: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     { gridPlace.status !== 'Finished' ? gridPlace.status : null }
                                     { gridPlace.Time ? gridPlace.Time.time : null }
                                 </Text>
                             </Text>
                         ): (
                             <Text 
-                                style={styles.contentCardDataLabel}
+                                style={globalStyles.contentCardDataLabel}
                                 textBreakStrategy="highQuality"
                             >
                                 {'Status: '}
-                                <Text style={styles.contentCardDataValue}>
+                                <Text style={globalStyles.contentCardDataValue}>
                                     {gridPlace.status}
                                 </Text>
                             </Text>
@@ -345,24 +384,9 @@ const Grid: React.FC<GridProps> = ({ grid }) => {
     );
 }
 
-const styles = StyleSheet.create({
-    mainContainer: {
-        width: '48%',
-        alignSelf: 'center'
-    },
-
-    secondaryContainer: {
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-between'
-    },
-
-    secondaryContainerCardWrapper: {
-        width: '48%'
-    },
-
+const globalStyles = StyleSheet.create({
     contentCard: {
-        height: 240,
+        height: 180,
         width: '100%',
         padding: 12,
         marginBottom: 12,
