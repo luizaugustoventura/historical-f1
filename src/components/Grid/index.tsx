@@ -41,17 +41,16 @@ const GridPodium: React.FC<GridProps> = ({ grid }) => {
     const [third, setThird] = useState<RaceResults>();
 
     const navigation = useNavigation();
-    console.log(grid.length);
 
     useEffect(() => { 
         setFirst(grid[0]);
         setSecond(grid[1]);
         setThird(grid[2]);
 
-        // if (!(first && second && third)) {
-        //     Alert.alert('Sorry', 'We did not find any data for your request');
-        //     navigation.goBack();
-        // }
+        if (!grid) {
+            Alert.alert('Sorry', 'We did not find any data for your request');
+            navigation.goBack();
+        }
     }, []);
 
     const styles = StyleSheet.create({
@@ -303,10 +302,9 @@ const GridPodium: React.FC<GridProps> = ({ grid }) => {
 
 const Grid: React.FC<GridProps> = ({ grid }) => {
     const navigation = useNavigation();
-    console.log(grid.length);
 
     if (!grid) {
-        Alert.alert('a', 'a');
+        Alert.alert('Sorry', 'We did not find any data for your request');
         navigation.goBack();
         return null;
     }
