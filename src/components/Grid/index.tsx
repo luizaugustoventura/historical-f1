@@ -311,9 +311,9 @@ const Grid: React.FC<GridProps> = ({ grid }) => {
 
     return (
         <>
-            { grid.map(gridPlace => (
+            { grid.map((gridPlace, index) => (
                 <View
-                    key={gridPlace.position} 
+                    key={gridPlace.Driver.driverId} 
                     style={[globalStyles.contentCard, getDriverPositionStyles(gridPlace.position)]}
                 >
                     <View>
