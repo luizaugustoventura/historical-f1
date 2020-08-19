@@ -41,7 +41,7 @@ const Home = () => {
             behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         >
             <View style={styles.header}>
-                <LogoBlack width={300} height={90} />
+                <LogoBlack width={350} height={105} />
             </View>
 
             <View style={styles.form}>
@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     },
 
     form: {
-        width: 300,
+        width: '98%',
+        maxWidth: 350
     },
 
     formInput: {
@@ -135,7 +136,8 @@ const styles = StyleSheet.create({
     },
 
     footerText: {
-        color: '#5A5454'
+        color: '#5A5454',
+        fontSize: 16
     },
 
     footerBoldText: {
