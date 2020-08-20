@@ -5,8 +5,17 @@
 </h3>
 
 <p>
-    Developed with React Native and Expo CLI, Historical F1 is an informative app fed by <a>Ergast Developer API</a>. The goal of this application was to practice and master all the React content I've been studying throughout 2020, specially since the beginning of the quarantine.
+    Developed with React Native and Expo CLI, Historical F1 is an informative app fed by <a href="http://ergast.com/mrd/">Ergast Developer API</a>. The goal of this application was to practice and master all the React content I've been studying throughout 2020, specially since the beginning of the quarantine.
 </p>
+
+<fieldset 
+    style="color: #D43939; border-color: red;"
+>
+    <legend><strong>Important about this branch</strong></legend>
+    <p>
+        This branch is no set as default branch due to some inconveniences affecting the Grid components. In the past, it was common in Formula 1 drivers switching cars and being placed at the same position, such as Tony Brooks and Stirling Moss being both first placed in the 1957 British Grand Prix.
+    </p>
+</fieldset>
 
 <h4>🛠 Tools and technologies 🛠</h4>
 <ul>
