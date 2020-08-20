@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import LoadingContent from '../../components/LoadingContent';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
 import api from '../../services/api';
 import { Params, RoundResultsResponse, RaceResults } from './interfaces';
 
@@ -19,22 +20,32 @@ const RoundResults = () => {
     const routeParams = route.params as Params;
 
     useEffect(() => {
-        if ((!routeParams.season) || (!routeParams.round)) {
-            Alert.alert('Ooops', 'Parameter not found');
-            navigation.goBack();
-            return;
-        }
-
-        api.get<RoundResultsResponse>(`${routeParams.season}/${routeParams.round}/results`)
-            .then(response => {
-                try {
-                    setRaceResults(response.data.MRData.RaceTable.Races[0].Results);
-                    setRaceName(response.data.MRData.RaceTable.Races[0].raceName);
-                } catch {
-                    Alert.alert('Sorry', 'We did not find any data for your request');
+        NetInfo.fetch().then((status: NetInfoState) => {
+            if (status.isInternetReachable) {
+                if ((!routeParams.season) || (!routeParams.round)) {
+                    Alert.alert('Ooops', 'Parameter not found');
                     navigation.goBack();
+                    return;
                 }
-            });
+        
+                api.get<RoundResultsResponse>(`${routeParams.season}/${routeParams.round}/results`)
+                    .then(response => {
+                        try {
+                            setRaceResults(response.data.MRData.RaceTable.Races[0].Results);
+                            setRaceName(response.data.MRData.RaceTable.Races[0].raceName);
+                        } catch {
+                            Alert.alert('Sorry', 'We did not find any data for your request');
+                            navigation.goBack();
+                        }
+                    });
+            } else {
+                Alert.alert('Network problem', 'You must have an internet connection to use this app');
+                navigation.goBack();
+            }
+        }).catch(() => {
+            Alert.alert('Network problem', 'Connection problems went on while loading this page');
+            navigation.goBack();
+        });
     }, []);
 
     function getDriverPositionStyles(position: string) {

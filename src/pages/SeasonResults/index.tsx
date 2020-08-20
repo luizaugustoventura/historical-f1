@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, Alert, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Feather as Icon } from '@expo/vector-icons';
+import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
 import api from '../../services/api';
 import isValidRound, { ShortDate } from '../../utils/validateRound'; 
 import {  Params, SeasonResultsResponse, Races } from './interfaces';
@@ -20,19 +21,28 @@ const SeasonResults = () => {
     const routeParams = route.params as Params;
 
     useEffect(() => {
-        if (!routeParams.season) {
-            Alert.alert('Ooops', 'Parameter not found');
+        NetInfo.fetch().then((status: NetInfoState) => {
+            if (status.isInternetReachable) {
+                if (!routeParams.season) {
+                    Alert.alert('Ooops', 'Parameter not found');
+                    navigation.goBack();
+                    return;
+                }
+                
+                api.get<SeasonResultsResponse>(`${routeParams.season}`).then(response => {
+                    try {
+                        setSeasonResults(response.data.MRData.RaceTable.Races);
+                    } catch {
+                        Alert.alert('Sorry', 'We did not find any data for your request');
+                        navigation.goBack();
+                    } 
+                });
+            } else {
+                Alert.alert('Network problem', 'You must have an internet connection to use this app');
+            }
+        }).catch(() => {
+            Alert.alert('Network problem', 'Connection problems went on while loading this page');
             navigation.goBack();
-            return;
-        }
-        
-        api.get<SeasonResultsResponse>(`${routeParams.season}`).then(response => {
-            try {
-                setSeasonResults(response.data.MRData.RaceTable.Races);
-            } catch {
-                Alert.alert('Sorry', 'We did not find any data for your request');
-                navigation.goBack();
-            } 
         });
     }, []);
 
