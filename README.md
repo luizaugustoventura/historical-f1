@@ -5,7 +5,7 @@
 </h3>
 
 <p>
-    Developed with React Native and Expo CLI, Historical F1 is an informative app fed by <a>Ergast Developer API</a>. The goal of this application was to practice and master all the React content I've been studying throughout 2020, specially since the beginning of the quarantine.
+    Developed with React Native and Expo CLI, Historical F1 is an informative app fed by <a href="http://ergast.com/mrd/">Ergast Developer API</a>. The goal of this application was to practice and master all the React content I've been studying throughout 2020, specially since the beginning of the quarantine.
 </p>
 
 <h4>🛠 Tools and technologies 🛠</h4>
