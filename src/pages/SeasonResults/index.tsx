@@ -41,6 +41,9 @@ const SeasonResults = () => {
                 Alert.alert('Network problem', 'You must have an internet connection to use this app');
                 navigation.goBack();
             }
+        }).catch(() => {
+            Alert.alert('Network problem', 'Connection problems went on while loading this page');
+            navigation.goBack();
         });
     }, []);
 
