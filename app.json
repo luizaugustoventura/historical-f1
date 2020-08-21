@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Historical F1",
+    "description": "An app developed by an F1 fan",
     "slug": "historical-f1",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,10 +19,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.luiz.historicalf1"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "android": {
+      "package": "com.luiz.historicalf1"
     },
     "packagerOpts": {
       "config": "metro.config.js",
