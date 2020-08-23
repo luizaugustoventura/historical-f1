@@ -28,7 +28,7 @@
 
 <h3 style="color: #E54A4A;">
     <img src="screenshots/brazil.jpg" alt="English" title="English" width="24" height="18" />
-    Historical F1 é um app que fornece dados sobre temporadas e etapas de qualquer temporada da Formula 1, desde 1960 até sua temporada atual!
+    Historical F1 é um app que fornece dados sobre temporadas e etapas de qualquer temporada da Formula 1, desde 1950 até sua temporada atual!
 </h3>
 
 <p>
