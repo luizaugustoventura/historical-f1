@@ -9,6 +9,15 @@
     Developed with React Native and Expo CLI, Historical F1 is an informative app fed by <a href="http://ergast.com/mrd/">Ergast Developer API</a>. The goal of this application was to practice and master all the React content I've been studying throughout 2020, specially since the beginning of the quarantine.
 </p>
 
+<fieldset 
+    style="color: #D43939; border-color: red;"
+>
+    <legend><strong>Important about this branch</strong></legend>
+    <p>
+        This branch does not include the styled podium, which is implemented in <a href="https://github.com/luizaugustoventura/historical-f1/tree/development">development branch</a>. The reason why is because some inconsistencies were found, as drivers in the past could switch cars and be placed in the same position at the end of the race. 
+    </p>
+</fieldset>
+
 <h4>🛠 Tools and technologies 🛠</h4>
 <ul>
     <li>React Native</li>
@@ -19,7 +28,7 @@
 
 <h4>🤔 What have I learned? 🤓</h3>
 <p>
-    Firstly, it is impossible not to talk about TypeScript and its importance. Many might think it affects the productivity at the beginning of the project, and that is true, since you obviously are going to create new data structures that the TypeScript will not be able to understand until you create an interface. But, as you keep going, TypeScript will help you a lot with auto complete features of your code editor, which avoid many mistakes you may commit without actually noticing. And last but not least, TypeScript is very important for other developers working on the same project, because they get to know what type of parameters functions will receive, which one of them are optional and the type of returning values as well.
+    Firstly, it is impossible not to talk about TypeScript and its importance. Many might think it affects productivity at the beginning of the project, and that is true since you obviously are going to create new data structures that the TypeScript will not be able to understand until you create an interface. But, as you keep going, TypeScript will help you a lot with auto-complete features of your code editor, which avoid many mistakes you may commit without actually noticing. And last but not least, TypeScript is very important for other developers working on the same project, because they get to know what types of parameters functions will receive, which one of them are optional and the type of returning values as well.
 </p>
 <p>
     Secondly, I also figured how important it is to have project and code standards, write code as clean as possible and to organize your files, assets and components in folders and subfolders with suggestive names. This is very important, because as your project gets bigger, it will not be difficult to understand it and locate resources. In addition, it will improve the scalability of your code, being much easier to apply changes and implement new features, since it will not require many modifications on your code.
@@ -34,6 +43,15 @@
 <p>
     Desenvolvido com React Native e Expo CLI, o Historical F1 é um app informativo alimentado pela <a href="http://ergast.com/mrd/">Ergast Developer API</a>. O objetivo desta aplicação foi praticar e dominar todo o conteúdo de React que eu venho estudando ao longo de 2020, especialmente desde o início da quarentena.
 </p>
+
+<fieldset 
+    style="color: #D43939; border-color: red;"
+>
+    <legend><strong>Importante sobre esta branch</strong></legend>
+    <p>
+        Esta branch não inclui o pódio estilizado, que é implementado na <a href="https://github.com/luizaugustoventura/historical-f1/tree/development">development branch</a>. A razão pela qual é porque algumas inconsistências foram encontradas, já que os pilotos no passado podiam trocar de carro e serem colocados na mesma posição ao final da corrida. 
+    </p>
+</fieldset>
 
 <h4>🛠 Ferramentas e tecnologias 🛠</h4>
 <ul>
