@@ -59,6 +59,7 @@ const Home = () => {
           onChangeText={(text) => onInputTextChanged(text)}
           placeholder="Input the F1 season you want..."
           keyboardType="numeric"
+          testID="search-season-input"
         />
 
         <RectButton
@@ -158,3 +159,4 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
+

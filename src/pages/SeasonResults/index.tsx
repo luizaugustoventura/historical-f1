@@ -88,7 +88,7 @@ const SeasonResults = () => {
   }
 
   return (
-    <View style={styles.mainContainer} testID="season-results-view">
+    <View style={styles.mainContainer}>
       <Header />
 
       <PageTitle text={`${routeParams.season} season results`} />
@@ -101,6 +101,7 @@ const SeasonResults = () => {
               activeOpacity={0.7}
               onPress={() => handleNavigateToRound(race.round, race.date)}
               key={race.round}
+              testID="season-results-card"
             >
               <View style={styles.contentCardHeader}>
                 <Text style={styles.contentCardHeaderTitle}>
@@ -182,3 +183,4 @@ const styles = StyleSheet.create({
 });
 
 export default SeasonResults;
+
