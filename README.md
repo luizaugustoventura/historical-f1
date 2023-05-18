@@ -14,7 +14,13 @@
 >
     <legend><strong>Important about this branch</strong></legend>
     <p>
+        This branch includes End-to-End tests and major Expo updates. If you want the initial project setup, refer to the <a href="https://github.com/luizaugustoventura/historical-f1/tree/master">master</a> branch.
+    </p>
+    <p>
         This branch does not include the styled podium, which is implemented in <a href="https://github.com/luizaugustoventura/historical-f1/tree/development">development branch</a>. The reason why is because some inconsistencies were found, as drivers in the past could switch cars and be placed in the same position at the end of the race. 
+    </p>
+    <p>
+        In order to create <b>E2E tests</b>, it was necessary to go from an <b>Expo Managed</b> project to <b>Bare Workflow</b> since <b>Detox</b> lib requires some Native configurations for the Android platform.  In order to reach this, I preferred to update Expo from 38 to 48 and use its new <code>expo prebuild</code> command, which replaced <code>expo eject</code>. It worked like a charm 🤩️!
     </p>
 </fieldset>
 
@@ -24,6 +30,7 @@
     <li>Expo CLI</li>
     <li>Axios</li>
     <li>TypeScript</li>
+    <li>Detox (E2E tests)</li>
 </ul>
 
 <h4>🤔 What have I learned? 🤓</h3>
@@ -32,6 +39,9 @@
 </p>
 <p>
     Secondly, I also figured how important it is to have project and code standards, write code as clean as possible and to organize your files, assets and components in folders and subfolders with suggestive names. This is very important, because as your project gets bigger, it will not be difficult to understand it and locate resources. In addition, it will improve the scalability of your code, being much easier to apply changes and implement new features, since it will not require many modifications on your code.
+</p>
+<p>
+    Ultimately, after a while I came back to this project in order to practice some knowledge I acquired recently on End-to-End testing. Well, one thing I can say is that I was definitely wrong when I thought it was as hard as moving a mountain. Once you have your setup done, it is pretty easy to write your tests and validate your requisites. This kind of test will be a great friend when it comes to testing long use cases whenever you have to change your code, slightly or heavily.
 </p>
 
 
@@ -49,8 +59,14 @@
 >
     <legend><strong>Importante sobre esta branch</strong></legend>
     <p>
+        Esta branch inclui testes End-to-End e várias atualizações do Expo. Se você deseja o setup inicial do projeto, consulte a branch <a href="https://github.com/luizaugustoventura/historical-f1/tree/master">master</a>.
+    </p>
+    <p>
         Esta branch não inclui o pódio estilizado, que é implementado na <a href="https://github.com/luizaugustoventura/historical-f1/tree/development">development branch</a>. A razão pela qual é porque algumas inconsistências foram encontradas, já que os pilotos no passado podiam trocar de carro e serem colocados na mesma posição ao final da corrida. 
     </p>
+    <p>
+        Para criar <b>testes E2E</b>, foi necessário mudar de um projeto <b>Expo Managed</b> para <b>Bare Workflow</b>, já que a biblioteca <b>Detox</b> requer algumas modificações para a plataforma do Android. Para conseguir isso, eu preferi atualizar o Expo de 38 para 48 e utilizar seu novo comendo <code>expo prebuild</code>, o qual substituiu o <code>expo eject</code>. Funcionou que é uma maravilha 🤩️!
+    </p
 </fieldset>
 
 <h4>🛠 Ferramentas e tecnologias 🛠</h4>
@@ -59,6 +75,7 @@
     <li>Expo CLI</li>
     <li>Axios</li>
     <li>TypeScript</li>
+    <li>Detox (Testes E2E)</li>
 </ul>
 
 <h4>🤔 O que eu aprendi? 🤓</h3>
@@ -67,6 +84,9 @@
 </p>
 <p>
     Em segundo lugar, também percebi como é importante ter padrões de projeto e código, escrever código o mais limpo possível e organizar seus arquivos, recursos e componentes em pastas e subpastas com nomes sugestivos. Isso é muito importante, pois conforme o seu projeto fica maior, não será difícil entendê-lo e localizar recursos. Além disso, irá melhorar a escalabilidade do seu código, sendo muito mais fácil aplicar alterações e implementar novos recursos, pois não exigirá muitas modificações em seu código.
+</p>
+<p>
+    Por fim, depois de um tempo, eu retornei para este projeto de modo a praticar alguns conhecimentos sobre testes End-to-End que eu adquiri recentemente. Bem, uma coisa que eu posso dizer é que eu definitivamente estava errado quando pensei que era tão difícil. Uma vez que você tem a configuração pronta, é bem fácil escrever os testes e validar seus requisitos. Este tipo de teste será um grande aliado na hora de testar casos de usos longos sempre que você modifica o seu código, levemente ou de forma impactante.
 </p>
 
 <h4>📷 Screenshots: 📷</h4>
@@ -95,3 +115,10 @@
         </td>
     </tr>
 </table>
+
+<h5>🤖️ End-To-End test 🤖️</h5>
+<img
+    src="screenshots/historical-f1-e2e.gif"
+    alt="Home page"
+    title="Home page"
+/>
