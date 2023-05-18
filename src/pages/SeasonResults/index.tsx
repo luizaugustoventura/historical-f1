@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, Text, Alert, StyleSheet } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 import { Feather as Icon } from "@expo/vector-icons";
 import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
 import api from "../../services/api";
@@ -9,7 +10,6 @@ import { Params, SeasonResultsResponse, Races } from "./interfaces";
 
 import Header from "../../components/Header";
 import PageTitle from "../../components/PageTitle";
-import LoadingContent from "../../components/LoadingContent";
 import ContentContainer from "../../components/ContentContainer";
 
 const SeasonResults = () => {
@@ -93,50 +93,68 @@ const SeasonResults = () => {
 
       <PageTitle text={`${routeParams.season} season results`} />
 
-      {seasonResults ? (
-        <ContentContainer>
-          {seasonResults.map((race) => (
-            <TouchableOpacity
-              style={styles.contentCard}
-              activeOpacity={0.7}
-              onPress={() => handleNavigateToRound(race.round, race.date)}
-              key={race.round}
-              testID="season-results-card"
-            >
-              <View style={styles.contentCardHeader}>
-                <Text style={styles.contentCardHeaderTitle}>
-                  {race.round}-{race.raceName}
-                </Text>
-                <Icon name="arrow-right" size={18} color="#E54A4A" />
-              </View>
-
-              <View style={styles.contentCardData}>
-                <Text style={styles.contentCardDataLabel}>
-                  Circuit:&nbsp;
-                  <Text style={styles.contentCardDataValue}>
-                    {race.Circuit.circuitName}
+      <ContentContainer>
+        {seasonResults ? (
+          <>
+            {seasonResults.map((race) => (
+              <TouchableOpacity
+                style={styles.contentCard}
+                activeOpacity={0.7}
+                onPress={() => handleNavigateToRound(race.round, race.date)}
+                key={race.round}
+                testID="season-results-card"
+              >
+                <View style={styles.contentCardHeader}>
+                  <Text style={styles.contentCardHeaderTitle}>
+                    {race.round}-{race.raceName}
                   </Text>
-                </Text>
+                  <Icon name="arrow-right" size={18} color="#E54A4A" />
+                </View>
 
-                <Text style={styles.contentCardDataLabel}>
-                  Location:&nbsp;
-                  <Text style={styles.contentCardDataValue}>
-                    {race.Circuit.Location.locality},{" "}
-                    {race.Circuit.Location.country}
+                <View style={styles.contentCardData}>
+                  <Text style={styles.contentCardDataLabel}>
+                    Circuit:&nbsp;
+                    <Text style={styles.contentCardDataValue}>
+                      {race.Circuit.circuitName}
+                    </Text>
                   </Text>
-                </Text>
 
-                <Text style={styles.contentCardDataLabel}>
-                  Date:&nbsp;
-                  <Text style={styles.contentCardDataValue}>{race.date}</Text>
-                </Text>
+                  <Text style={styles.contentCardDataLabel}>
+                    Location:&nbsp;
+                    <Text style={styles.contentCardDataValue}>
+                      {race.Circuit.Location.locality},{" "}
+                      {race.Circuit.Location.country}
+                    </Text>
+                  </Text>
+
+                  <Text style={styles.contentCardDataLabel}>
+                    Date:&nbsp;
+                    <Text style={styles.contentCardDataValue}>{race.date}</Text>
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </>
+        ) : (
+          <>
+            {[...Array(5)].map((_, i) => (
+              <View style={styles.contentCard} key={i}>
+                <SkeletonPlaceholder backgroundColor="#D3D3D3">
+                  <>
+                    <SkeletonPlaceholder.Item height={22} />
+
+                    <View style={styles.contentCardData}>
+                      <SkeletonPlaceholder.Item height={18} marginBottom={12} />
+                      <SkeletonPlaceholder.Item height={18} marginBottom={12} />
+                      <SkeletonPlaceholder.Item height={18} marginBottom={12} />
+                    </View>
+                  </>
+                </SkeletonPlaceholder>
               </View>
-            </TouchableOpacity>
-          ))}
-        </ContentContainer>
-      ) : (
-        <LoadingContent />
-      )}
+            ))}
+          </>
+        )}
+      </ContentContainer>
     </View>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
-import LoadingContent from "../../components/LoadingContent";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
+import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 import api from "../../services/api";
 import { Params, RoundResultsResponse, RaceResults } from "./interfaces";
 
@@ -105,69 +105,88 @@ const RoundResults = () => {
         }
       />
 
-      {raceResults ? (
-        <ContentContainer>
-          {raceResults.map((result) => (
-            <View
-              key={result.position}
-              style={[
-                styles.contentCard,
-                getDriverPositionStyles(result.position),
-              ]}
-              testID="round-results-card"
-            >
-              <View>
-                <Text style={styles.contentCardHeaderTitle}>
-                  {result.position}
-                </Text>
-              </View>
-
-              <View style={styles.contentCardData}>
-                <Text style={styles.contentCardDataLabel}>
-                  Driver:&nbsp;
-                  <Text style={styles.contentCardDataValue}>
-                    {result.Driver.givenName} {result.Driver.familyName}
+      <ContentContainer>
+        {raceResults ? (
+          <>
+            {raceResults.map((result) => (
+              <View
+                key={result.position}
+                style={[
+                  styles.contentCard,
+                  getDriverPositionStyles(result.position),
+                ]}
+                testID="round-results-card"
+              >
+                <View>
+                  <Text style={styles.contentCardHeaderTitle}>
+                    {result.position}
                   </Text>
-                </Text>
+                </View>
 
-                <Text style={styles.contentCardDataLabel}>
-                  Nationality:&nbsp;
-                  <Text style={styles.contentCardDataValue}>
-                    {result.Driver.nationality}
-                  </Text>
-                </Text>
-
-                <Text style={styles.contentCardDataLabel}>
-                  Team:&nbsp;
-                  <Text style={styles.contentCardDataValue}>
-                    {result.Constructor.name}
-                  </Text>
-                </Text>
-
-                {result.status === "Finished" ||
-                result.status.startsWith("+") ? (
+                <View style={styles.contentCardData}>
                   <Text style={styles.contentCardDataLabel}>
-                    Finished:&nbsp;
+                    Driver:&nbsp;
                     <Text style={styles.contentCardDataValue}>
-                      {result.status !== "Finished" ? result.status : null}
-                      {result.Time ? result.Time.time : null}
+                      {result.Driver.givenName} {result.Driver.familyName}
                     </Text>
                   </Text>
-                ) : (
+
                   <Text style={styles.contentCardDataLabel}>
-                    Status:&nbsp;
+                    Nationality:&nbsp;
                     <Text style={styles.contentCardDataValue}>
-                      {result.status}
+                      {result.Driver.nationality}
                     </Text>
                   </Text>
-                )}
+
+                  <Text style={styles.contentCardDataLabel}>
+                    Team:&nbsp;
+                    <Text style={styles.contentCardDataValue}>
+                      {result.Constructor.name}
+                    </Text>
+                  </Text>
+
+                  {result.status === "Finished" ||
+                  result.status.startsWith("+") ? (
+                    <Text style={styles.contentCardDataLabel}>
+                      Finished:&nbsp;
+                      <Text style={styles.contentCardDataValue}>
+                        {result.status !== "Finished" ? result.status : null}
+                        {result.Time ? result.Time.time : null}
+                      </Text>
+                    </Text>
+                  ) : (
+                    <Text style={styles.contentCardDataLabel}>
+                      Status:&nbsp;
+                      <Text style={styles.contentCardDataValue}>
+                        {result.status}
+                      </Text>
+                    </Text>
+                  )}
+                </View>
               </View>
-            </View>
-          ))}
-        </ContentContainer>
-      ) : (
-        <LoadingContent />
-      )}
+            ))}
+          </>
+        ) : (
+          <>
+            {[...Array(4)].map((_, i) => (
+              <View style={styles.contentCard} key={i}>
+                <SkeletonPlaceholder backgroundColor="#D3D3D3">
+                  <>
+                    <SkeletonPlaceholder.Item height={22} />
+
+                    <View style={styles.contentCardData}>
+                      <SkeletonPlaceholder.Item height={18} marginBottom={12} />
+                      <SkeletonPlaceholder.Item height={18} marginBottom={12} />
+                      <SkeletonPlaceholder.Item height={18} marginBottom={12} />
+                      <SkeletonPlaceholder.Item height={18} marginBottom={12} />
+                    </View>
+                  </>
+                </SkeletonPlaceholder>
+              </View>
+            ))}
+          </>
+        )}
+      </ContentContainer>
     </View>
   );
 };
@@ -183,7 +202,7 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 12,
     borderRadius: 10,
-    //backgroundColor: '#FFF'
+    backgroundColor: "#FFF",
   },
 
   contentCardHeaderTitle: {
@@ -209,3 +228,4 @@ const styles = StyleSheet.create({
 });
 
 export default RoundResults;
+
